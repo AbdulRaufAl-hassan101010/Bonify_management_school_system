@@ -1,6 +1,6 @@
 const connection = require("../db/connection");
 
-const addSchool = (req, res) => {
+const addSchoolAddress = (req, res) => {
   const data = req.body;
 
   // return data in lower case
@@ -11,36 +11,42 @@ const addSchool = (req, res) => {
     }
   }
 
+  if (req.params.id) req.body.school_id = req.params.id;
+
   // insert school in db
-  connection.query("INSERT INTO schools SET ?", data, function (err, result) {
-    if (err) {
-      return res.status(400).send(new Object(err));
-    }
-
-    return res.status(201).send(data);
-  });
-};
-
-const getSchools = (_, res) => {
-  // get schools in db
   connection.query(
-    "SELECT id, name, email, phone, created_at, updated_at FROM schools",
+    "INSERT INTO schools_address SET ?",
+    data,
     function (err, result) {
       if (err) {
         return res.status(400).send(new Object(err));
       }
 
-      return res.status(200).send(result);
+      return res.status(201).send(data);
     }
   );
 };
 
-const getSchool = (req, res) => {
+const getSchoolsAddress = (_, res) => {
+  // get schools in db
+  connection.query("SELECT * FROM schools_address", function (err, result) {
+    console.log(123);
+    if (err) {
+      return res.status(400).send(new Object(err));
+    }
+
+    return res.status(200).send(result);
+  });
+};
+
+const getSchoolAddress = (req, res) => {
   const { id } = req.params;
+
+  console.log(123);
 
   // get school in db
   connection.query(
-    "SELECT id, name, email, phone, created_at, updated_at FROM schools WHERE id=?",
+    "SELECT * FROM schools_address WHERE school_id=?",
     [id],
     function (err, result) {
       if (err) {
@@ -58,14 +64,14 @@ const getSchool = (req, res) => {
   );
 };
 
-const updateSchool = (req, res) => {
+const updateSchoolAddress = (req, res) => {
   // id url query
   const { id } = req.params;
   // update updated_ay
   req.body.updated_at = new Date(Date.now());
 
   //   make sql string for update
-  let query = "UPDATE schools SET ";
+  let query = "UPDATE schools_address SET ";
   const keys = Object.keys(req.body);
   const placeholders = [];
   keys.forEach((key, index) => {
@@ -75,7 +81,7 @@ const updateSchool = (req, res) => {
     query += ` ${key}=? `;
     placeholders.push(req.body[key]);
   });
-  query += `WHERE id=? `;
+  query += `WHERE school_id=? `;
 
   // update school in db
   connection.query(query, [...placeholders, id], function (err, result) {
@@ -90,16 +96,16 @@ const updateSchool = (req, res) => {
     }
 
     // get user in db
-    getSchool(req, res);
+    getSchoolAddress(req, res);
   });
 };
 
-const deleteSchool = (req, res) => {
+const deleteSchoolAddress = (req, res) => {
   // id url query
   const { id } = req.params;
 
   connection.query(
-    "DELETE FROM schools WHERE id=?",
+    "DELETE FROM schools_address WHERE school_id=?",
     id,
     function (err, results) {
       if (err) {
@@ -116,9 +122,9 @@ const deleteSchool = (req, res) => {
 };
 
 module.exports = {
-  addSchool,
-  getSchools,
-  getSchool,
-  updateSchool,
-  deleteSchool,
+  addSchoolAddress,
+  getSchoolsAddress,
+  getSchoolAddress,
+  updateSchoolAddress,
+  deleteSchoolAddress,
 };
