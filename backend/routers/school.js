@@ -14,14 +14,27 @@ const {
   updateSchoolAddress,
   deleteSchoolAddress,
 } = require("../controllers/schoolAddress");
+const {
+  addSchoolDetails,
+  getSchoolsDetails,
+  getSchoolDetails,
+  updateSchoolDetails,
+  deleteSchoolDetails,
+} = require("../controllers/schoolDetails");
 
 // address
 router.post("/address", addSchoolAddress);
-router.post("/address/:id", addSchoolAddress);
 router.get("/address", getSchoolsAddress);
 router.get("/address/:id", getSchoolAddress);
 router.patch("/address/:id", updateSchoolAddress);
 router.delete("/address/:id", deleteSchoolAddress);
+
+// details
+router.post("/details", addSchoolDetails);
+router.get("/details", getSchoolsDetails);
+router.get("/details/:id", getSchoolDetails);
+router.patch("/details/:id", updateSchoolDetails);
+router.delete("/details/:id", deleteSchoolDetails);
 
 router.post("/", addSchool);
 router.get("/", getSchools);

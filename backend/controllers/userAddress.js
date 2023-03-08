@@ -1,36 +1,23 @@
 const connection = require("../db/connection");
 
-const addSchoolAddress = (req, res) => {
+const addUserAddress = (req, res) => {
   const data = req.body;
 
-  // return data in lower case
-  for (let key in data) {
-    field = data[key];
-    if (typeof field === "string") {
-      data[key] = field.toLowerCase();
-    }
-  }
-
-  if (req.params.id) req.body.school_id = req.params.id;
+  if (req.params.id) req.body.user_id = req.params.id;
 
   // insert school in db
-  connection.query(
-    "INSERT INTO schools_address SET ?",
-    data,
-    function (err, result) {
-      if (err) {
-        return res.status(400).send(new Object(err));
-      }
-
-      return res.status(201).send(data);
+  connection.query("INSERT INTO users_address SET ?", data, function (err, _) {
+    if (err) {
+      return res.status(400).send(new Object(err));
     }
-  );
+
+    return res.status(201).send(data);
+  });
 };
 
-const getSchoolsAddress = (_, res) => {
-  // get schools in db
-  connection.query("SELECT * FROM schools_address", function (err, result) {
-    console.log(123);
+const getUsersAddress = (_, res) => {
+  // get users in db
+  connection.query("SELECT * FROM users_address", function (err, result) {
     if (err) {
       return res.status(400).send(new Object(err));
     }
@@ -39,12 +26,14 @@ const getSchoolsAddress = (_, res) => {
   });
 };
 
-const getSchoolAddress = (req, res) => {
+const getUserAddress = (req, res) => {
   const { id } = req.params;
+
+  console.log(123);
 
   // get school in db
   connection.query(
-    "SELECT * FROM schools_address WHERE school_id=?",
+    "SELECT * FROM users_address WHERE user_id=?",
     [id],
     function (err, result) {
       if (err) {
@@ -62,14 +51,14 @@ const getSchoolAddress = (req, res) => {
   );
 };
 
-const updateSchoolAddress = (req, res) => {
+const updateUserAddress = (req, res) => {
   // id url query
   const { id } = req.params;
   // update updated_ay
   req.body.updated_at = new Date(Date.now());
 
   //   make sql string for update
-  let query = "UPDATE schools_address SET ";
+  let query = "UPDATE users_address SET ";
   const keys = Object.keys(req.body);
   const placeholders = [];
   keys.forEach((key, index) => {
@@ -79,7 +68,7 @@ const updateSchoolAddress = (req, res) => {
     query += ` ${key}=? `;
     placeholders.push(req.body[key]);
   });
-  query += `WHERE school_id=? `;
+  query += `WHERE user_id=? `;
 
   // update school in db
   connection.query(query, [...placeholders, id], function (err, result) {
@@ -94,16 +83,16 @@ const updateSchoolAddress = (req, res) => {
     }
 
     // get user in db
-    getSchoolAddress(req, res);
+    getUserAddress(req, res);
   });
 };
 
-const deleteSchoolAddress = (req, res) => {
+const deleteUserAddress = (req, res) => {
   // id url query
   const { id } = req.params;
 
   connection.query(
-    "DELETE FROM schools_address WHERE school_id=?",
+    "DELETE FROM users_address WHERE user_id=?",
     id,
     function (err, results) {
       if (err) {
@@ -120,9 +109,9 @@ const deleteSchoolAddress = (req, res) => {
 };
 
 module.exports = {
-  addSchoolAddress,
-  getSchoolsAddress,
-  getSchoolAddress,
-  updateSchoolAddress,
-  deleteSchoolAddress,
+  addUserAddress,
+  getUsersAddress,
+  getUserAddress,
+  updateUserAddress,
+  deleteUserAddress,
 };

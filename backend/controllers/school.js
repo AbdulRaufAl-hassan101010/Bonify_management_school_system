@@ -3,21 +3,13 @@ const connection = require("../db/connection");
 const addSchool = (req, res) => {
   const data = req.body;
 
-  // return data in lower case
-  for (let key in data) {
-    field = data[key];
-    if (typeof field === "string") {
-      data[key] = field.toLowerCase();
-    }
-  }
-
   // insert school in db
-  connection.query("INSERT INTO schools SET ?", data, function (err, result) {
+  connection.query("INSERT INTO schools SET ?", data, function (err, _) {
     if (err) {
       return res.status(400).send(new Object(err));
     }
 
-    return res.status(201).send(data);
+    return res.status(201).send({});
   });
 };
 
