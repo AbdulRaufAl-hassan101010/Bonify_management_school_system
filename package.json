@@ -2,10 +2,11 @@
   "name": "bonify_school_management_system",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "backend/app.js",
   "scripts": {
     "start": "node backend/app.js",
-    "dev:start": "nodemon backend/app.js"
+    "server": "nodemon backend/app.js",
+    "client": "npm start --prefix frontend"
   },
   "keywords": [],
   "author": "",
