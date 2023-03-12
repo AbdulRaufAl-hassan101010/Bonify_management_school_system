@@ -4,6 +4,7 @@ const express = require("express");
 const lowerCase = require("./middlewares/lowerCase");
 const schoolRouter = require("./routers/school");
 const userRouter = require("./routers/user");
+const classRouter = require("./routers/class");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.use(lowerCase);
 // apis
 app.use("/api/schools", schoolRouter);
 app.use("/api/users", userRouter);
+app.use("/api/classes", classRouter);
 
 app.listen(PORT, () => {
   console.log("running on port 3000");
