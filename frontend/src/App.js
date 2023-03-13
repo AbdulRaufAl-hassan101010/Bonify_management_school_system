@@ -1,25 +1,25 @@
-import "./App.css";
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+} from "react-router-dom";
 
-function App() {
-  return (
+import Navbar from "./components/landingPage/Navbar";
+import Home from "./pages/landingPage/Home.js";
+
+const App = createBrowserRouter(
+  createRoutesFromElements(
     <>
-      <h1>Hello world</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-        temporibus sapiente eius odit accusamus rerum ea dolores reprehenderit
-        quia et rem mollitia praesentium, excepturi totam animi quisquam qui
-        officiis beatae.
-      </p>
-      <div>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum
-        nostrum voluptas corrupti doloribus magnam incidunt dolores eos ab
-        temporibus, nulla sequi velit consequatur perspiciatis nemo iste nam in
-        quae illum beatae officiis ullam facere nobis. Ipsum, nemo natus rem
-        error neque obcaecati laborum, vitae quibusdam modi nostrum voluptates,
-        perspiciatis voluptate.
-      </div>
+      <Route path="/" element={<Home />}>
+        <Route path="contact" element={<Navbar />} />
+        <Route path="dashboard" element={<Navbar />} />
+        <Route element={<Navbar />}>
+          <Route path="login" element={<Navbar />} />
+          <Route path="logout" />
+        </Route>
+      </Route>
     </>
-  );
-}
+  )
+);
 
 export default App;
