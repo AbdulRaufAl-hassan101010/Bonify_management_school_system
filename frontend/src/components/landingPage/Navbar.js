@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../Button";
 
+import logo from "../../assets/images/logo.png";
+
 const Nav = styled.nav`
+  position: sticky;
+  top: 0;
   width: 100%;
   background-color: var(--white-color);
   height: 7rem;
@@ -11,10 +15,19 @@ const Nav = styled.nav`
   align-items: center;
 
   .container {
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .logo {
+    width: 15rem;
+    height: 5rem;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+    }
   }
 
   ul {
@@ -36,7 +49,11 @@ const Navbar = () => {
   return (
     <Nav>
       <div className="container">
-        <div>logo</div>
+        <div className="logo">
+          <Link to="/err">
+            <img src={logo} alt="" />
+          </Link>
+        </div>
         <ul>
           <li>
             <Link to="/">Support</Link>
