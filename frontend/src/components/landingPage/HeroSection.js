@@ -73,7 +73,7 @@ const HeroSection = () => {
             </p>
             <div className="buttons-container">
               <Button>Get started</Button>
-              <Button outline>Watch a demo</Button>
+              <Button outline={true}>Watch a demo</Button>
             </div>
           </div>
         </div>

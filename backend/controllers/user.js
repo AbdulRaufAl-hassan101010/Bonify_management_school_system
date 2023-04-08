@@ -1,15 +1,52 @@
 const connection = require("../db/connection");
+const jwt = require("jsonwebtoken");
 
 const addUser = (req, res) => {
-  const query = "INSERT INTO users SET ?";
-  connection.query(query, req.body, function (err, results) {
-    if (err) return res.status(400).send(new Object(err));
+  // Create user and add token
+  connection.beginTransaction(function (err) {
+    if (err) {
+      throw err;
+    }
+    connection.query(
+      "INSERT INTO users SET ?",
+      req.body,
+      function (error, results) {
+        if (error) {
+          return connection.rollback(function () {
+            throw error;
+          });
+        }
 
-    return res.status(201).send({});
+        const id = results.insertId;
+        const token = jwt.sign({ id }, "jsusiuysyusysyusy");
+
+        connection.query(
+          "INSERT INTO user_tokens (user_token_id, token) VALUES(?, ?)",
+          [id, token],
+          function (error, results) {
+            if (error) {
+              return connection.rollback(function () {
+                throw error;
+              });
+            }
+            connection.commit(function (err) {
+              if (err) {
+                return connection.rollback(function () {
+                  throw err;
+                });
+              }
+              req.session.token = token;
+              console.log("done");
+              res.status(201).json({ token });
+            });
+          }
+        );
+      }
+    );
   });
 };
 
-const getUsers = (_, res) => {
+const getUsers = (req, res) => {
   const query =
     "SELECT id, first_name, last_name, email, phone, role, school_id, created_at, updated_at FROM users";
   connection.query(query, function (err, results) {

@@ -13,6 +13,7 @@ const Nav = styled.nav`
   height: 7rem;
   display: flex;
   align-items: center;
+  border-bottom: 0.01rem solid var(--grey-color);
 
   .container {
     display: flex;
@@ -50,7 +51,7 @@ const Navbar = () => {
     <Nav>
       <div className="container">
         <div className="logo">
-          <Link to="/err">
+          <Link to="/">
             <img src={logo} alt="" />
           </Link>
         </div>
@@ -59,13 +60,13 @@ const Navbar = () => {
             <Link to="/">Support</Link>
           </li>
           <li>
-            <Link to="/">Features</Link>
+            <Link to="/features">Features</Link>
           </li>
           <li>
-            <Link to="/">Pricing</Link>
+            <Link to="/pricing">Pricing</Link>
           </li>
           <li>
-            <Button>Get Started</Button>
+            <Button to="/signup">Get Started</Button>
           </li>
         </ul>
       </div>

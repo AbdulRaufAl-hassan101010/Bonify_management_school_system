@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Button = styled.a`
+const ButtonContainer = styled.span`
   padding: 1rem 1.6rem;
   border-radius: 3.7rem;
   display: inline-block;
@@ -20,5 +21,18 @@ const Button = styled.a`
     opacity: 0.8;
   }
 `;
+
+const Button = (props) => {
+  return (
+    <Link to={props.to}>
+      <ButtonContainer
+        {...props}
+        className={props.block ? "block text-center" : "sss"}
+      >
+        {props.children}
+      </ButtonContainer>
+    </Link>
+  );
+};
 
 export default Button;

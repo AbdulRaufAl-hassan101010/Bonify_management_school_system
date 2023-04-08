@@ -7,9 +7,9 @@ const GlobalStyle = createGlobalStyle`
     --header-font: 'Open Sans', sans-serif;
     --secondary-font: 'Poppins', sans-serif;
     --white-color: #fff;
-    --dark-color: '#a8a8a8';
     --light-dark-color: rgba(0,0,0,0.7);
-    --light-red-color: rgba(126,23,9,0.07)
+    --light-red-color: rgba(126,23,9,0.07);
+    --grey-color: #f3f3f3;
   }
 
   * {
@@ -83,6 +83,37 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 800;
   }
 
+  .mt-1 {
+    margin-top: 2rem;
+  }
+  .mt-2 {
+    margin-top: 3.5rem;
+  }
+
+
+  .flex {
+    display: flex;
+  }
+
+
+  .jc-sb {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .block {
+    display: block;
+    width: 100%;
+  }
+
+
+ .w-100{
+    width: 100%;
+  }
+
+  .text-center {
+    text-align: center;
+  }
 
 
   
