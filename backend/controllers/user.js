@@ -13,7 +13,7 @@ const addUser = (req, res) => {
       function (error, results) {
         if (error) {
           return connection.rollback(function () {
-            throw error;
+            res.status(400).send({});
           });
         }
 

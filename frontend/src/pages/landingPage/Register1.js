@@ -21,7 +21,7 @@ const Register1 = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const submitFormHandler = async () => {
+  const submitFormHandler = async (e) => {
     try {
       const body = {
         first_name,
@@ -33,8 +33,6 @@ const Register1 = () => {
       };
 
       const user = await User.addUser(body);
-
-      console.log(user);
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +42,7 @@ const Register1 = () => {
       <Navbar />
       <RegisterContainer>
         <div className="container">
-          <RegisterTabs />
+          <RegisterTabs id="1" />
           <form className="w-100">
             <div className="mt-1 flex jc-sb">
               <Input
@@ -100,7 +98,7 @@ const Register1 = () => {
               />
             </div>
             <div className="mt-2">
-              <Button block="block" onClick={submitFormHandler}>
+              <Button type="submit" block="block" onClick={submitFormHandler}>
                 Next
               </Button>
             </div>

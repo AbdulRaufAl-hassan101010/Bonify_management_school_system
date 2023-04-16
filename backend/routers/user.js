@@ -21,7 +21,6 @@ const {
   deleteUserDetails,
 } = require("../controllers/userDetails");
 
-
 // address
 router.post("/address", addUserAddress);
 router.get("/address", getUsersAddress);
@@ -41,7 +40,6 @@ router.get("/", getUsers);
 router.get("/:id", getUser);
 router.patch("/:id", updateUser);
 router.delete("/:id", deleteUser);
-
 
 router.all("*", (_, res) => {
   res.status(404).send({

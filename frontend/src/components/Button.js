@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const ButtonContainer = styled.span`
+const ButtonContainer = styled.button`
   padding: 1rem 1.6rem;
+  border: none;
   border-radius: 3.7rem;
   display: inline-block;
   background: ${(props) => (props.bg ? props.bg : `var(--primary-color)`)};

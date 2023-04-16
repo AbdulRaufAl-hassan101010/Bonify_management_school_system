@@ -32,15 +32,10 @@ const RegisterTabsContainer = styled.div`
 const tabs = [
   { title: "User Info", icon: "fa-sharp fa-solid fa-user fa-2x" },
   { title: "School Info", icon: "fa-sharp fa-solid fa-school fa-2x" },
-  { title: "Personal Details", icon: "fa-sharp fa-solid fa-list fa-2x" },
-  { title: "User Info", icon: "fa-sharp fa-solid fa-school fa-2x" },
+  { title: "School Details", icon: "fa-sharp fa-solid fa-list fa-2x" },
 ];
 
-const RegisterTabs = () => {
-  // get url params to set active tab
-  let { id } = useParams();
-  if (!id) id = 1;
-
+const RegisterTabs = (props) => {
   return (
     <RegisterTabsContainer>
       {tabs.map(({ title, icon }, index) => {
@@ -48,8 +43,8 @@ const RegisterTabs = () => {
           <React.Fragment key={index}>
             <Link
               key={index}
-              to=""
-              className={+id === index + 1 ? "active" : ""}
+              to={props.link}
+              className={+props.id === index + 1 ? "active" : ""}
             >
               <div className="display-2">{index + 1}</div>
               <i className={icon}></i>

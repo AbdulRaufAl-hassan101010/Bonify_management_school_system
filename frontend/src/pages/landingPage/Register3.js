@@ -17,22 +17,37 @@ const Register2 = () => {
       <Navbar />
       <RegisterContainer>
         <div className="container">
-          <RegisterTabs id="2" />
+          <RegisterTabs id="3" />
           <form className="w-100">
-            <div className="mt-1 flex jc-sb">
-              <Input placeholder={"School name"} label="School name" />
-            </div>
-            <div className="mt-1 flex jc-sb">
-              <Input type="email" placeholder={"Email"} label="Email" />
-            </div>
-            <div className="mt-1 flex jc-sb">
-              <Input placeholder={"Phone no."} label="Phone number" />
-            </div>
             <div className="mt-1 flex jc-sb">
               <Input placeholder={"Founder's Name"} label="Founder's Name" />
             </div>
+            <div className="mt-1 flex jc-sb">
+              <Input
+                type="date"
+                placeholder={"Established Date"}
+                label="Established Date"
+              />
+            </div>
+            <div className="mt-1 flex jc-sb">
+              <Input type="text" placeholder={"Address 1"} label="Address 1" />
+            </div>
+            <div className="mt-1 flex jc-sb">
+              <Input type="text" placeholder={"Address 2"} label="Address 2" />
+              <Input placeholder={"Postal code"} label="Postal code" />
+            </div>
+            <div className="mt-1 flex jc-sb">
+              <Input
+                type="text"
+                required
+                placeholder={"Digital Address"}
+                label="Digital Address"
+              />
+            </div>
             <div className="mt-2">
-              <Button block="block">Next</Button>
+              <Button type="submit" block="block">
+                Next
+              </Button>
             </div>
           </form>
         </div>

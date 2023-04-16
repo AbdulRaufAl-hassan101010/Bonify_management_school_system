@@ -24,7 +24,7 @@ const Input = (props) => {
   return (
     <InputContainer>
       {props.label && <label>{props.label}</label>}
-      <input value={props.value} onChange={inputHandler} />
+      <input {...props} value={props.value} onChange={inputHandler} />
     </InputContainer>
   );
 };
